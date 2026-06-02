@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: raw_ecom
+    database: my-bigquery-project-id
+    schema: raw_data
+    tables:
+      - name: orders
+      - name: users
+
+models:
+  - name: stg_ecom_orders
+    description: "Cleaned and filtered raw staging e-commerce orders map."
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+  - name: fct_customer_orders
+    description: "Mart table outlining customer aggregation metrics for BI layers."
